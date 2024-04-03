@@ -10,28 +10,28 @@ namespace tcpServer
     {
         static async Task Main(string[] args)
         {
-            //const string ip = "127.0.0.1";
-            //const int port = 8080;
-            //IPEndPoint tcpEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
-            //var tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            const string ip = "127.0.0.1";
+            const int port = 8080;
+            IPEndPoint tcpEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            var tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            //try
-            //{
-            //    tcpSocket.Bind(tcpEndPoint);
-            //    tcpSocket.Listen();
-            //    Console.WriteLine("Сервер запущен. Ожидание подключений... ");
+            try
+            {
+                tcpSocket.Bind(tcpEndPoint);
+                tcpSocket.Listen();
+                Console.WriteLine("Сервер запущен. Ожидание подключений... ");
 
-            //    while (true)
-            //    {
-            //        var tcpClient = await tcpSocket.AcceptAsync();
+                while (true)
+                {
+                    var tcpClient = await tcpSocket.AcceptAsync();
 
-            //        Task.Run(async() => await Host(tcpClient));
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+                    Task.Run(async () => await Host(tcpClient));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Auth.CheckDB();
         }
