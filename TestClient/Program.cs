@@ -16,9 +16,7 @@ namespace TCPClient
                 LogEventLevel.Error
             );
 
-            TestFunction();
-
-            
+            Client.Connect();
 
             while (true)
             {
